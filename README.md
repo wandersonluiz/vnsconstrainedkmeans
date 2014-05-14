@@ -1,4 +1,4 @@
-LOatitudinal time series semi-supervised clustering 
+Latitudinal time series semi-supervised clustering 
 =========
 
 I provided a virtual instance of my doctoral work: Clustered Time Series of Satellite Images by VNS Basic Local Search with Constraint in Campinas State University. I do that because my conviction in the importance of reprodubility and continuation of work.
