@@ -1,14 +1,35 @@
-Latitudinal time series semi-supervised clustering 
+Agrupamento de Séries Temporais de Imagens de Satélite
 =========
 
-I provided a virtual instance of my doctoral work: Clustered Time Series of Satellite Images by VNS Basic Local Search with Constraint in Campinas State University. I do that because my conviction in the importance of reprodubility and continuation of work.
+Estou fornecendo uma instância virtual da minha tese de doutorado: **Agrupamento de Séries Temporais de Imagens de Satélite 
+por VNS Básico com busca local e restrições**. Realizada no departamento de matemática aplicada da
+Universidade de Campinas (Unicamp) em parceria com o CePAgri/Unicamp. Todos os códigos fontes e executáveis estão disponíveis 
+sobre a licença Gnu General Public License ou Gnu Lesser General Public Licence. As licenças aplicadas estão declaradas na 
+documentação do programa.
 
-Here you will find all developed programs in MatLab, database files (CSV), latex and pdf version of the thesis. All source code and executables are available under the GNU General Public License or GNU Lesser General Public Licence. Allowances are applied declared in the program documentation.
+Neste repositório você encontrará todos os programas que desenvolvi (em MatLab na sua maioria), arquivos de banco de 
+dados (.CSV), mapas mentais, arquivos fontes LaTeX, minha tese (pdf) e todo material que julguei adequado compartilhar. 
+Os arquivos foram organizados na seguinte estrutura de pasta:
 
+### 1. LiteratureReference (referência bibliográfica) ###
+> Para não infringir direitos autorais, os artigos não foram disponibilizados. Mas as fererência em formato *.bib* 
+> de todos os artigos, organizados por temas, foram disponibilizados. 
 
+### 2. Programs (programas e scripts) ###
+> Todos os programas desenvolvidos na tese.
+>
 
-Agrupamento semmissupervisionado de séries temporais latitudinais 
-=========
-Pela crença na importância da reprodutibilidade e continuação do trabalho, disponibilizei uma instância virtual de minha tese de doutorado: Agrupamentos de Séries Temporais de Imagens de Satélite por VNS Básico com Busca Local com Restrições.
-
-Contando com todos os programas desenvolvidos em MatLab, arquivos de banco de dados (CSV) e a versão em pdf e latex da tese. Todos os códigos fontes e executáveis estão disponíveis sobre a licença Gnu General Public License ou Gnu Lesser General Public Licence. As licenças aplicadas estão declaradas na documentação do programa.
+### 3. Data Repository (repositório de dados) ###
+> Todos os arquivos de banco de dados usado na construção do *benchmarking* do algoritmo. O formato de entrada de 
+> dados é normalizado, contando com um arquivo ".csv", contendo todos os dados de forma simples e um meta-arquivo, 
+> padrão ".arf" contendo informações do números de instâncias, tipo de dados e breve descrição dos dados. O formato 
+> ".arf" foi um formado criado por mim, baseado no cabeçalho do arquivo ".arff", padrão entrada do programa Weka.
+>
+> Os arquivos contam com 3 categorias de dados. 
+>  1. **Dados sintéticos:** criados para visualizar em 2D o comportamento dos algoritmos.
+>  2. **Dados reais:** extraídos de repositórios virtuais.
+>  3. **Dados de séries temporais:** dados  reais de séries temporais.
+ 
+### 4. Misselanius (Miscelânea) ###
+> A pasta Miscelânea poderia ser chamada e "outros", ou mesmo "todo o resto". Conta com os arquivos fonte da tese e algumas
+> apresentações além dos arquivos de mapas mentais que desenvolvi no decorrer da tese.
