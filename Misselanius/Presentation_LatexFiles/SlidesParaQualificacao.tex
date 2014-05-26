@@ -1,0 +1,510 @@
+\documentclass{beamer}
+
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuges, brazil]{babel}
+\usepackage{ragged2e}
+\usepackage{graphics}
+\usepackage[ruled,lined, boxed, commentsnumbered]{algorithm2e}
+\usepackage{color}
+\usepackage{tikz}
+\usetikzlibrary{chains,shapes.arrows,fit}
+\usetikzlibrary{trees}
+\usetikzlibrary{arrows}
+\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+\usepackage{helvet}
+\usepackage{dcolumn}
+\usepackage{multirow}
+\usepackage{booktabs}
+
+\usetheme{default}
+\usecolortheme{seahorse}
+\useinnertheme{circles}
+\useoutertheme{infolines}
+
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamertemplate{sidebar canvas left}[horizontal shading][left=white!40!black,right=black]
+
+
+%% acrescentar "(cont.)" ao títulos de slides com quebras
+\setbeamertemplate{frametitle continuation}[from second]
+
+\newtheorem{mydef}{Definição}
+\newtheoremstyle{example}{\topsep}{\topsep}%
+     {}%         Body font
+     {}%         Indent amount (empty = no indent, \parindent = para indent)
+     {\bfseries}% Thm head font
+     {}%        Punctuation after thm head
+     {\newline}%     Space after thm head (\newline = linebreak)
+     {\thmname{#1}\thmnumber{ #2}\thmnote{ #3}}%         Thm head spec
+\theoremstyle{example}
+
+%redefinindo e definindo termos frequentes
+\providecommand{\sin}{}\renewcommand{\sin}{\hspace{2 pt}\textrm{sen}}
+\providecommand{\tan}{}\renewcommand{\tan}{\hspace{2 pt}\textrm{tg}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\cpp}{\texttt{C$++$}}
+\newcommand{\latex}{\LaTeX}
+\newcommand{\DM}{{\it DM}}
+\newcommand{\VNS}{{\it VNS}}
+\newcommand{\kmeans}{$k$-médias}
+\newcommand{\MCKmeans}{{\it MCKmeans}}
+\newcommand{\NDVI}{{\it NDVI}}
+%\newcommand{\cluster}{{\it cluster}}
+
+%%% AGRUP 
+%Estilo de letra para AGRUPAMENTO - clustering
+\newcommand{\agrup}[1]{\mathcal{#1}} 
+%%%Vetores e COnjunto de vetores
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\centroid}{\mathbf{c}}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\vetor}[1]{\mathbf{#1}}%centroides
+
+
+\newcommand{\la}{\leftarrow}
+\newcommand{\argmin}[2]{\underset{#1}{\operatorname{argmin} #2}}
+\newcommand{\AlgInit}{\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+}
+
+
+%%%%definindo comandos
+
+%%% OBS
+%(<==) comando obs para observação. Cria uma seta a esquerda e gera o comentário em footnote.
+\newcommand{\obs}[1]{\marginpar{\textcolor{red}{$\Longleftarrow$}} \footnote{\textcolor{red}{[#1]}}}
+
+%%% CITAR
+%comando para citação a posteriori. Observação para lembrar de citar
+\newcommand{ \citar}[1]{\marginpar{\textcolor{red}{$\Longleftarrow$}} \textcolor{red}{[citar #1]}}
+
+%%% ING
+%termos em inglês
+\newcommand{\ing}[1]{{\it #1}} 
+
+%%%NOMES DE FUNCOES
+\newcommand{\func}[1]{$\mathrm{ #1}$}
+\title{Agrupamentos de Séries Temporais de Imagens de Satélite por {\it VNS} Básico com Busca Local e Restrições}
+\author{Wanderson L. da Silva \and Francisco A. M. Neto}% \and Jurandir Zullo Jr. \and Stanley R. M. Oliveira}
+\institute{IMECC/Unicamp} 
+\date{2014}
+
+%% mostrar o plano no iní­cio de cada secão
+\AtBeginSection[] 
+{
+\begin{frame}<beamer>
+\frametitle{Plano}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+%% Início do documento
+\begin{document}
+\begin{frame}
+\maketitle
+\end{frame}
+
+%<dizer porque se interessar por \DM (pletora de dados)>: 
+% citar volume de dados produzidos nos ultimos anos
+\begin{frame}\frametitle{Sumário}
+\tableofcontents
+\end{frame}
+
+\section{Motivação}
+%%%   SLIDE   %%%%%%%%
+
+\begin{frame}{Pletora de dados}
+\includegraphics[width = \textwidth]{Images/PletoraDeDados.pdf}
+%<dizer porque se interessar por \DM (pletora de dados)>: 
+% http://www.sec.gov/Archives/edgar/data/51143/000110465913015636/a13-6155_18k.htm
+\end{frame}
+
+\begin{frame}{Aplicações}
+\includegraphics[height = 0.4\textheight]
+{Images/GoogleFlu.pdf} 
+\\
+
+\hfill \includegraphics[height = 0.4\textheight]
+{Images/EducationalDM.pdf}
+\end{frame}
+
+\begin{frame}{Interdisciplinaridade}{Otimização e mineração de dados}
+\footnotesize
+\begin{itemize}
+\item {\it Linear and nonlinear separation of patterns by linear programming}
+\item {\it Integer programming and the theory of grouping}
+\item {\it A branch and bound algorithm for feature subset selection}
+\item {\it Evaluating alternative linear programming models to solve the two-group discriminant problem}
+\item {\it Improved linear programming models for discriminant analysis}
+\item {\it Misclassification minimization}
+\item {\it Support vector networks}
+\item {\it Mathematical programming in data mining}
+\item {\it Feature subset selection within a simulated annealing data mining algorithm}
+\item {\it Optimization-based data clustering using the nested partitions method}
+\end{itemize}
+\end{frame}
+
+\section{Formulação do problema}
+%%%   SLIDE   %%%%%%%%
+\begin{frame}{Problema original} 
+\centering
+\includegraphics[height = .8\textheight]{Images/ImagemNDVI.png}
+\end{frame}
+
+
+\begin{frame}
+\begin{block}{Problema de agrupamento por partição}
+Seja $\X = \{ \x_1, \dots, \x_m \}$, onde $\x_i = (x_{i1},\cdots,x_{id})  \in \R^d$. O problema de agrupamento consiste em obter uma partição $\mathbf{P}^*$ de $\X$ em $k$ subconjuntos que atenda um determinado critério de qualidade $Q$, de forma que $Q(\mathbf{P}^*)\geq Q(\mathbf{P}), \,\forall \mathbf{P}\in \mathcal{P}$. 
+\end{block}
+
+
+\pause
+
+\begin{block}{Problema de agrupamento baseado em centroides}
+Determinar um conjunto $C^* = \{\vetor{c}_1, \cdots, \vetor{c}_k\}$ de centroides que formem $k$ subconjuntos do tipo 
+$$
+C_j = \left\{\forall x \in X \Big| 
+\argmin{1 \leq l \leq k \qquad\quad}{d(\vetor{x},\vetor{c}_{l})} = j \right\},
+$$ 
+de forma que $C^*$ atenda um critério de qualidade $Q$ tal que $Q(\mathbf{C}^*)\geq Q(\mathbf{C})$ para todo $C$.
+\end{block}
+\end{frame}
+
+%%%   SLIDE   %%%%%%%%
+\begin{frame}{Formalização do problema}
+
+{\Large
+\begin{block}{}
+\begin{align}
+\min &\,\;f(C) = \sum_{i=1}^{n} \min_{1 \leq j \leq k} ||x_i -c_j||^2 \nonumber\\
+\text{s.a}\;\;& \,\; C \in \Omega \nonumber
+\end{align}
+\end{block}
+}
+
+\bigskip
+tal que: 
+\begin{enumerate}
+\item $C \in \Omega \Rightarrow \left(\forall \vetor{c_j} \in C, \exists \vetor{x} \in \X \text{ tal que } j = \argmin{1 \leq l \leq k\qquad\qquad}{||x - c_l||^2_2}\right)$.
+
+\item $\left(C_i, C_j \in \Omega \text{, com } C_i \neq C_j \right) \Rightarrow \vetor{x} \in C_i$ e $\vetor{y} \in C_j$, então $\exists \vetor{w} \in \R^d \text{ tal que } (\vetor{w}^t\vetor{x}) \cdot (\vetor{w}^t \vetor{y}) < 0$ 
+\end{enumerate}
+\end{frame}
+
+\section{Proposta}
+%%%   SLIDE   %%%%%%%%
+\begin{frame}{Objetivos}
+\begin{figure}
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, text width=8em, text badly centered, node distance=5cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=black!3, text width=.6\textwidth, text centered, rounded corners, minimum height=.3\textheight, minimum width=.8\textwidth]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=10cm, minimum height=2em]
+
+\centering
+\begin{tikzpicture}[node distance = 2cm, auto]
+\node [block] (st1)
+{Uso combinado da \VNS\, com o \kmeans\, projetado};
+\pause
+\node [block, below of=st1, node distance=4cm] (st2) 
+{Uso do descritor  $<\mathcal{F}, L_2>$ para aplicação de métodos de dados estáticos em séries temporais.};
+\path [line] (st1) -- (st2);
+\end{tikzpicture}
+\end{figure}
+\end{frame}
+
+
+%%%   SLIDE   %%%%%%%%
+\begin{frame}{Busca em vizinhança variável ({\it VNS})}
+
+\pause
+\begin{enumerate}
+\item Um mínimo local com relação a uma estrutura de vizinhança não é necessariamente um mínimo local com relação às outras estruturas de vinhança. \pause
+
+\bigskip
+\item Um mínimo global é um mínimo local com relação a quaisquer estruturas de vizinhança.\pause
+
+\bigskip
+\item Para um grande número de problemas, mínimos locais com relação a uma, ou a várias vizinhanças, são relativamente próximos.
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\includegraphics[width = \textwidth]{Images/MudancaVizinhanca.pdf}
+\end{frame}
+
+\begin{frame}
+\includegraphics[height = \textheight]{Images/GraficoSalto.pdf}
+\end{frame}
+
+%\begin{frame}{\ing{Basic \VNS}}
+%\IncMargin{2em}
+%\begin{algorithm}[H]
+%\caption{{\small esquema básico de busca em vizinhança variável}}
+%\AlgInit
+%{\normalsize
+%
+%\bigskip
+%BasicVNS($\x,i_{max},t_{max}$)\\
+%\Repeat{$t>t_{max}$}
+%	{$i \leftarrow 1$ \;
+% 	\Repeat{$i = i_{max}$}
+%		{$\x' \leftarrow$ Shake($x,i$)\;
+%		 $\x'' \leftarrow$ LocalSearch($x'$)\;
+%		$\x \leftarrow$ NChange($\x,\x'',i$)
+%		}
+%	$t \la $ tempo de processamento}
+%}
+%\end{algorithm}
+%\DecMargin{2em}
+%\end{frame}
+
+%%%   SLIDE   %%%%%%%%
+\begin{frame}
+\IncMargin{2em}
+\begin{algorithm}[H]
+\caption{esquema geral do algoritmo proposto}
+\AlgInit
+{\footnotesize
+
+\Input{\\
+$\X$ \hspace{.6cm} conjunto dos pontos $\{\x_1, \x_2, \cdots, \x_n\}$ a serem agrupados\\
+$\vetor{C}$ \hspace{.6cm} conjunto de centroides iniciais $\{\vetor{c}_1, \vetor{c}_2, \cdots, \vetor{c}_k\}$\\
+$\Omega_c$\hspace{.5cm} conjunto de restrições de caixa $\{ \mathcal{H}_1, \mathcal{H}_2, \cdots, \mathcal{H}_{k'}\}$\\
+$k $\hspace{.7cm} número de grupos a serem gerados\\
+$t_{max}$ \hspace{.1cm} tempo máximo de execução
+}
+
+\Output{\\
+$\vetor{C} \quad\quad$ melhor solução (conjunto de centroides) obtida dentre as investigadas.}
+
+\BlankLine
+BasicVNS($\X,\vetor{C},\Omega_c,k,t_{max}$)\\
+$i_{max} \quad \longleftarrow \frac{n}{10}$ \\
+
+\Repeat{$t>t_{max}$}
+	{$i \leftarrow 1$ \;
+ 	\Repeat{$i = i_{max}$}
+		{
+            $\vetor{C}' \leftarrow$ \textcolor{red}{Shake($\vetor{C},i$)}\;
+		 $\vetor{C}'' \leftarrow$ \textcolor{red}{LocalSearch($\X, k, \vetor{C}', \Omega_c$)}\;
+		 $\vetor{C}, i \leftarrow$NeighbourhoodChange($\vetor{C},\vetor{C}'',i$)
+		}
+	$t \la $ tempo de processamento
+}
+}
+\end{algorithm}
+\DecMargin{2em}
+\end{frame}
+
+
+\subsection{Busca local}
+%%%   SLIDE   %%%%%%%%
+\begin{frame}{Incorporando conhecimento}{formas de restrição}
+{\Large
+\begin{enumerate}
+\item Relações de paridade,
+\bigskip \pause
+
+\item Amostra de classes, 
+\bigskip \pause
+
+\item {\it Seeds} para inicialização.
+\end{enumerate}
+}
+\end{frame}
+
+%%%   SLIDE   %%%%%%%%
+\begin{frame}{Paradigmas supervisionados, não supervisionados e semissupervisionados}
+\includegraphics[width = \textwidth]{Images/GraficoSemi.pdf}
+\end{frame}
+
+
+
+%%%   SLIDE   %%%%%%%%
+\begin{frame}{Função \func{LocalSearch}}
+
+\begin{algorithm}[H]
+\caption{\kmeans\, projetado}
+\AlgInit
+
+\BlankLine
+$\vetor{C} \leftarrow$ LocalSearch($\X, k, \vetor{C}, \Omega_c$)\\
+
+{\small
+\begin{description}
+\item{\bf passo 1 (inicialização): } usar $C$ como solução inicial
+
+\item{\bf passo 2 (atribuição): } associar cada elemento $x_j$, com $j\in \{1, \cdots,n\}$, ao centroide mais próximo ($C \rightarrow P$)
+
+\item{\bf passo 3 (teste de otimalidade local): } se não houve alguma mudança no passo anterior, parar aqui
+
+\item{\textcolor{red}{\bf passo 4 (projeção): }} \textcolor{red}{$C' \longleftarrow$ \func{Projection}$(C', C, \Omega_c)$}\\
+
+\item{\bf passo 5 (atualização): } trocar os centroides $C$ da solução corrente por $C'$ e voltar para o {\bf passo 2}
+\end{description}
+}
+\end{algorithm}
+\IncMargin{2em}
+\end{frame}
+
+%%%   SLIDE   %%%%%%%%
+\begin{frame}{Espaço factível}
+$\Omega_c = \{\mathcal{H}_1, \cdots, \mathcal{H}_{k'}\}$, com:
+\begin{align}
+\mathcal{H}_i = \left\{\x \in \R^d \Bigg| \mu_j - \frac{3\sigma_j}{\sqrt{n_i}} \leq x_j \leq \mu_j - \frac{3\sigma_j}{\sqrt{n_i}}, \forall j \in \{1, \cdots, d \}\right\},
+\nonumber
+\end{align}
+onde $\mu_j$ e $\sigma_j$ são, respectivamente, a média e o desvio padrão, na dimensão j, da amostra $A_i = \{\x_1^{(i)}, \cdots, \x_{n_i}^{(i)}\}$ de uma classe $i$. 
+\end{frame}
+
+\subsection{Estruturas de vizinhança}
+%%%   SLIDE   %%%%%%%%
+\begin{frame}{Estrutura de vizinhança $1$}{realocação dos mais distantes}
+{\Large
+\begin{block}{}
+\begin{align}
+N^{(1)}_i (C_1) = \left\{C \in \Omega \Big| \left( r(C_1,C) = i \right) \bigwedge \left(\mathbf{w}(C_1) \cdot \mathbf{e}_j \geq L\right) \right\},
+\nonumber
+\end{align}
+\end{block}
+}
+\bigskip
+com $j$ varia entre $1$ e $i$.
+
+\end{frame}
+
+%%%   SLIDE   %%%%%%%%
+\begin{frame}{Medida de aderência}
+
+{\Large
+\begin{block}{}
+\begin{align}
+\eta(\x_j) &= \dfrac{||\x_j - \vetor{c}_l|| - \mu_l}{\sigma_l},
+\nonumber
+\end{align}
+\end{block}
+}
+
+\bigskip
+onde
+\begin{align} 
+\mu_l &= \dfrac{\sum_{\x \in \mathbf{C}_l} ||\x - \vetor{c}_l||}{\#\mathbf{C}_l}, %&(\text{média das distorções do grupo } l)\label{media}
+\nonumber
+\\
+\sigma_l &= \left( \frac{1}{\#\mathbf{C}_l}\sum_{\x \in \mathbf{C}_l} \left| ||\x_j - \vetor{c}_l|| - \mu_l\right|^2 \right)^{\frac{1}{2}}. 
+\nonumber
+%&(\text{desvio padrão das distorções do grupo } l)\label{desviopadrao}
+\end{align}
+\end{frame}
+
+%%%   SLIDE   %%%%%%%%
+\begin{frame}{Estrutura de vizinhança $2$}{realocação do mais discrepante}
+{\Large
+\begin{block}{}
+\begin{align}
+N^{(2)}_i (C_1) = \left\{C \in \Omega \Big| (r(C_1,C) = i) \bigwedge \left( \Theta(C_1) \cdot \mathbf{e}_j \geq L, \right)\right\}
+\nonumber
+\end{align}
+\end{block}
+}
+
+\bigskip
+\noindent onde: 
+\begin{itemize}
+\item $j$ varia entre $1$ e $i$,
+\item $L$ é o $i$-ésimo maior valor de $\eta$ entre os elementos da solução $C_1$,
+\item $\Theta(C_1)$ é o vetor decrescente dos valores $\eta$ dos elementos de $C_1$.
+\end{itemize}
+\end{frame}
+
+%%%   SLIDE   %%%%%%%%
+\begin{frame}{Estrutura de vizinhança $3$}{realocação intensa}
+
+{\Large
+\begin{block}{}
+\begin{align}
+ N_i^{(3)} (C_1) = 
+\left\{
+C \in \Omega \Big|
+\Theta(C_i) \cdot \mathbf{e}_j \geq L_i
+\right\},
+\nonumber
+\end{align}
+\end{block}
+\bigskip
+\hfill com $L_i = 5 - 0,1i$.
+}
+\end{frame}
+
+%%%   SLIDE   %%%%%%%%
+\subsection{Aplicação em séries temporais}
+\begin{frame}{transformação de dados}
+
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, text width=8em, text badly centered, node distance=5cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=black!3, text width=12em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=10cm, minimum height=2em]
+\begin{figure}[!h]
+    \centering
+    \begin{tikzpicture}[node distance = 2cm, auto]
+        \node [block] (st1) {{\bf Estágio 1}\\ pré-processamento\\ de dados};
+        \node [block, below of=st1, node distance=2.5cm] (st2) {{\bf Estágio 2}\\ sumarização \\dos dados};
+        \node [block, below of=st2, node distance=2.5cm] (st3) {{\bf Estágio 3}\\ transformação\\ dos dados};
+        \path [line] (st1) -- (st2);
+        \path [line] (st2) -- (st3);
+    \end{tikzpicture}
+\end{figure}
+\end{frame}
+
+%%%   SLIDE   %%%%%%%%
+\begin{frame}{Análise funcional}
+\includegraphics[width = \textwidth]{Images/Decomposicao.pdf}
+\end{frame}
+
+%%%   SLIDE   %%%%%%%%
+\begin{frame}
+Para $y(k)$, com $k \in \{1,2,3, \cdots , n \}$, têm-se:
+
+\begin{align}
+y_t &= \bar{y}+ \sum^{\lfloor\frac{n}{2}\rfloor}_{k=1}\left[ A_k\cos \left( \frac{2\pi kt}{n}\right) + B_k\sin\left(\frac{2\pi kt}{n}\right)\right],
+\nonumber
+\end{align}
+onde $\bar{y}$ é a média aritmética dos dados e
+\begin{eqnarray}
+A_k = \frac{2}{n}\sum^n_{t=1}y_t\cos\left( \frac{2\pi kt}{n}\right) \qquad\textrm{e}\qquad
+B_k = \frac{2}{n}\sum^n_{t=1}y_t\sin\left( \frac{2\pi kt}{n}\right).
+\nonumber
+\end{eqnarray}
+\end{frame}
+
+\section{Conclusão}
+%%%   SLIDE   %%%%%%%%
+\begin{frame}{Trabalhos futuros}
+\begin{block}{{\it benckmarking}}
+Avaliar comparativamente o método proposto em dados sintéticos, reais e nas séries temporais de \NDVI.
+\end{block}
+
+\begin{table}[h]\footnotesize
+%\caption{Performance dos algoritmos na base de dados sintética}
+\centering
+\begin{tabular}{lccc} \toprule
+{algoritmos}& {\it B-cubed recall} & {\it B-cubed precision} & {MSSC} \\ \midrule
+\kmeans 								&  &  & \\
+{\it Multi-start} \kmeans 								&  &  & \\
+{\it COP}  \kmeans   						&  &  & \\
+\kmeans\, projetado 					&  &  & \\ 
+\midrule
+\VNS\, + $N^{(1)(2)(3)}$ + \kmeans 		& & &\\
+\VNS\, + $N^{(1)(2)(3)}$ + COP  \kmeans &  & &\\
+\VNS\, + $N^{(1)(2)(3)}$ + \\ \hspace{1cm} \kmeans\, projetado & & & \\ 
+%\midrule
+\bottomrule
+\end{tabular}
+\end{table}
+\end{frame}
+
+\end{document}

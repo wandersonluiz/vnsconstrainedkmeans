@@ -1,0 +1,61 @@
+% 1. Title: Sinthetic R2 points just for validation
+%			Pontos sintéticos do R2 para simples validação
+%%
+% 2. Abstract: 
+%    Syntetic R2 data created to validate classification or clustering perform.
+%
+%    Dados sintéticos do R2, criados para validação de classificação ou clusterização.
+%%
+% 3. Sources:
+%      (a) Creator: W. L. Silva
+%      (b) Donor: W. L. Silva (wanderson.luiz@gmail.com)
+%      (c) Date: January, 2013
+%%
+% 4. Past Usage: 
+%%
+% 5. Relevant Information 
+% One point at origin, 4 clusters allocated at circunference with radius 100 and 
+% 4 clusters allocated at circunference with radius 100\sqrt{2}.
+%
+% Um elemento na origem e 4 clusters distribuidos no perímetro de um círculo 
+% de raio 100 e outros 4 distribuídos em perímetro de um círculo de raio 100\sqrt{2}.
+%%
+% 6. Characteristcs:
+%	(a) Data Set Characteristics:Multivariate
+%	(b) Attribute Characteristics:Real
+%	(c) # Instances:25 (3 for each class and 1 class with 1)
+%	(d) # Attributes:2 (xy coordinates)
+%	(e) # Missing Values:0
+%	(f) # class:9 (12% of data for each class 2-9 and 4% to class 1)
+%%
+% 7. Remark:
+%    This data was created by the following matlab code:
+%
+% 	Data = [0 0 1]
+% 	x = @(r,teta) r*cos(teta);
+% 	y = @(r,teta) r*sin(teta);
+% 	teta = 0:pi/2:3*(pi/2);
+% 	raio = [100 100*(1+sqrt(2))];
+%   delta = +pi/16;
+%   k = 2;
+% 	for i = 1:4
+%		for j =1:2
+%			Data = [Data;
+%				x(raio(j), teta(i)),  y(raio(j),teta(i)), k;
+%				x(raio(j), teta(i)+delta),  y(raio(j),teta(i)+delta), k;
+%				x(raio(j), teta(i)-delta),  y(raio(j),teta(i)-delta), k
+%				];
+%			k = k+1;
+%		end
+%	end
+% 	csvwrite('SimpleCircle.csv', Data)
+%%%
+
+@RELATION Square
+
+@ATTRIBUTE x NUMERIC
+@ATTRIBUTE y NUMERIC
+@ATTRIBUTE class {1,2,3,4,5,6,7,8,9}
+
+@DATA
+<SimpleCircle.csv>

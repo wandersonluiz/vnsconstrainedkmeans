@@ -1,0 +1,63 @@
+function[Data metaData textScanParam] = ExtractData(fileName)
+% [numAttributes nameAttributes typeAttributes] = ReadData(fileName)
+%       Extrai do arquivo ARFF informações de quantidade, nome e tipo
+%       dos atributos. A partir desses metadados obter os dados
+
+%->adequar a leitura do arquivo as extensões. 
+% Coloca ARFF se não tiver.
+if (length(fileName) <= 4) || ~strcmpi(fileName(end-4:end),'.ARFF')
+    fileName = strcat(fileName,'.ARFF');
+end
+
+METAFILE = fileread(fileName);
+regExp1 = '# Instances:\d*?';
+[idxStart idxEnd] = regexpi(METAFILE,regExp1);
+metaData.numInstances = str2double(METAFILE(idxStart+12:idxEnd));
+
+regExp1 = '# Attributes:\d*?';
+[idxStart idxEnd] = regexpi(METAFILE,regExp1);
+metaData.numAttributes = str2double(METAFILE(idxStart+14:idxEnd));
+
+regExp1 = '# class: \d*?';
+[idxStart idxEnd] = regexpi(METAFILE,regExp1);
+metaData.numClass = str2double(METAFILE(idxStart+8:idxEnd));
+
+regExp2 = '@ATTRIBUTE\s.*?\r';
+[idxStart idxEnd] = regexpi(METAFILE,regExp2);
+for i=1:metaData.numAttributes
+    rangeAux = idxStart(i)+11:idxEnd(i);
+    auxLine = METAFILE(rangeAux);
+    splitPoint = regexpi(auxLine,'\s');
+    metaData.nameAttributes{i} = strtrim(auxLine(1:splitPoint-1));
+    metaData.typeAttributes{i} = strtrim(auxLine(splitPoint+1:end));
+end
+%->Modificar os not Numeric/Real para String, ou seja, trocar f por s
+% nas posições cujo o tipo é diferente de Numeric/Real
+
+%Cria a string que será usada na entrada do TEXTSCAN
+textScanParam(1:3*metaData.numAttributes) = '%';
+textScanParam(2:3:3*metaData.numAttributes) = 'f';
+textScanParam(2:3:3*metaData.numAttributes) = ' ';
+textScanParam = strcat(textScanParam, '%s %*[\r]');
+
+for i=1:metaData.numAttributes
+    if ~(strcmpi(metaData.typeAttributes{i},'NUMERIC') || ...
+            strcmpi(metaData.typeAttributes{i},'REAL'))
+        textScanParam(3*i-1) = 's';
+    end
+end
+
+%Extrai em Data, os dados do arquivo csv, em acordo com o 
+%tipo específicado em textScanParam
+fileName = strcat(fileName(1:end-4),'CSV');
+fid = fopen(fileName);
+Data = textscan(fid,textScanParam,'delimiter',',');
+fclose(fid);
+
+% %problemas de erros de incoerência
+% for i=1:metaData.numInstances
+%     if (length(Data{i}) ~= metaData.numInstances)
+%         error('myApp:validation', 'incoerência entre o número de instâncias do metadado e a dimensão dos dados extraídos.')
+%     end
+% end
+end

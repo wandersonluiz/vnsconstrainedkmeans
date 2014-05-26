@@ -1,0 +1,43 @@
+% 1. Title: Pontos sintéticos do R2 
+%%
+% 2. Abstract: 
+%    Syntetic R2 data created to visualize classification or clustering perform.
+%
+%    Dados sintéticos do R2, criados para visualização de classificação ou clusterização.
+%%
+% 3. Sources:
+%      (a) Creator: W. L. Silva
+%      (b) Donor: W. L. Silva (wanderson.luiz@gmail.com)
+%      (c) Date: January, 2013
+%%
+% 4. Past Usage: 
+%%
+% 5. Relevant Information 
+% Five clusters of R2 synthetic data, witch one with 500 instances, totaling 2500 instances.
+% Generated from a nornal distribuction in each dimension, with standart deviation 5, and center
+% at points {(0,0),(25,25),(-25,25),(-25,-25),(25,-25)}. 
+%
+% Cinco grupos de dados sintéticos no R2, cada um com 500 instâncias, totalizando 2500 instâncias.
+% Criados a partir de uma distribuição normal em cada dimensão, com desvio padrão 5 e centrados nos
+% pontos {(0,0),(25,25),(-25,25),(-25,-25),(25,-25)}. 
+%%
+% 6. Characteristcs:
+%	(a) Data Set Characteristics: Multivariate
+%	(b) Attribute Characteristics: Real
+%	(c) # Instances:2500 (500 each class)
+%	(d) # Attributes:2 (xy coordinates)
+%	(e) # Missing Values:0
+%	(f) # class:5 (25% of data for each class)
+%%
+% 7. Remark:
+%    This data was first create by a matlab code (SyntheticData.m)
+%%%
+
+@RELATION Square
+
+@ATTRIBUTE x NUMERIC
+@ATTRIBUTE y NUMERIC
+@ATTRIBUTE class {1,2,3,4,5}
+
+@DATA
+<Square.csv>
