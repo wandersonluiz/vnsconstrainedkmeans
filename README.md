@@ -1,5 +1,5 @@
 Agrupamento de Séries Temporais de Imagens de Satélite
-=========
+------------------------------------------------------
 
 Estou fornecendo uma instância virtual da minha tese de doutorado: **Agrupamento de Séries Temporais de Imagens de Satélite 
 por VNS Básico com busca local e restrições**. Realizada no departamento de matemática aplicada da
