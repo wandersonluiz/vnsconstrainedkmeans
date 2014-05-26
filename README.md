@@ -5,7 +5,7 @@ Estou fornecendo uma instância virtual da minha tese de doutorado: **Agrupament
 
 Neste repositório você encontrará todos os programas que desenvolvi (em MatLab na sua maioria), arquivos de banco de dados (.CSV), mapas mentais, arquivos fontes LaTeX, minha tese (pdf) e todo material que julguei adequado compartilhar. Os arquivos foram organizados na seguinte estrutura de pasta:
 
-### 1. LiteratureReference (referÃªncia bibliogrÃ¡fica) ###
+### 1. LiteratureReference (referências bibliográficas) ###
 > Para não infringir direitos autorais, os artigos não foram disponibilizados. Mas foi disponibilizada todas as referências em formato *.bib*, organizados por temas. 
 
 ### 2. Programs (programas e scripts) ###
@@ -32,3 +32,4 @@ Neste repositório você encontrará todos os programas que desenvolvi (em MatLa
  
 ### 4. Misselanius (Miscelânea) ###
 > A pasta Miscelânea poderia ser chamada e "outros", ou mesmo "todo o resto". Conta com os arquivos fonte da tese e algumas apresentações além dos arquivos de mapas mentais que desenvolvi no decorrer da tese.
+
