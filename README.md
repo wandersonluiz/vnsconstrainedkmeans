@@ -11,7 +11,7 @@ Neste repositório você encontrará todos os programas que desenvolvi (em MatLa
 ### 2. Programs (programas e scripts) ###
 > Todos os programas desenvolvidos na tese.
 
-### 3. Data Repository (repositório de dados) ###
+### 3. DataRepository (repositório de dados) ###
 > Todos os arquivos de banco de dados usado na construção do *benchmarking* do algoritmo. O formato de entrada de dados é normalizado, contando com um arquivo ".csv", contendo todos os dados de forma simples e um meta-arquivo, padrão ".arf" contendo informações do números de instâncias, tipo de dados e breve descrição dos dados. O formato ".arf" foi um formado criado por mim, baseado no cabeçalho do arquivo ".arff", padrão entrada do programa Weka.
 >
 > Os arquivos contam com 3 categorias de dados. 
@@ -19,17 +19,5 @@ Neste repositório você encontrará todos os programas que desenvolvi (em MatLa
 >  2. **Dados reais:** extraídos de repositórios virtuais.
 >  3. **Dados de séries temporais:** dados  reais de séries temporais.
  
-### 4. Misselanius (Miscelânea) ###
-> A pasta Miscelânea poderia ser chamada e "outros", ou mesmo "todo o resto". Conta com os arquivos fonte da tese e algumas apresentações além dos arquivos de mapas mentais que desenvolvi no decorrer da tese.
-
-### 3. Data Repository (repositório de dados) ###
-> Todos os arquivos de banco de dados usado na construção do *benchmarking* do algoritmo. O formato de entrada de dados é normalizado, contando com um arquivo ".csv", contendo todos os dados de forma simples e um meta-arquivo, padrão ".arf" contendo informações do números de instâncias, tipo de dados e breve descrição dos dados. O formato ".arf" foi um formado criado por mim, baseado no cabeçaalho do arquivo ".arff", padrão entrada do programa Weka.
->
-> Os arquivos contam com 3 categorias de dados. 
->  1. **Dados sintéticos:** criados para visualizar em 2D o comportamento dos algoritmos.
->  2. **Dados reais:** extraídos de repositórios virtuais.
->  3. **Dados de séries temporais:** dados  reais de séries temporais.
- 
-### 4. Misselanius (Miscelânea) ###
-> A pasta Miscelânea poderia ser chamada e "outros", ou mesmo "todo o resto". Conta com os arquivos fonte da tese e algumas apresentações além dos arquivos de mapas mentais que desenvolvi no decorrer da tese.
-
+### 4. Misc (Miscelânea) ###
+> A pasta Misc poderia ser chamada e "outros", ou mesmo "todo o resto". Conta com os arquivos fonte da tese e algumas apresentações além dos arquivos de mapas mentais que desenvolvi no decorrer da tese.
