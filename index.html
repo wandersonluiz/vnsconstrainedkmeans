@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -15,20 +16,26 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Apresentação</h1>
-        <p>Estou fornecendo uma instância virtual da minha tese de doutorado realizada no departamento de matemática aplicada da Universidade de Campinas (Unicamp). Neste repositório você encontrará todos os programas que desenvolvi, arquivos de banco de dados, arquivos fontes LaTeX e todo material que julguei adequado compartilhar. </p>
-
-        <p class="view"><a href="https://github.com/wandersonluiz/VNSConstrainedKMeans">View the Project on GitHub <small>wandersonluiz/VNSConstrainedKMeans</small></a></p>
-
+        <h1 class="header">Apresentação</h1>
+        <p class="header">Estou fornecendo uma instância virtual da minha tese de doutorado: Agrupamento de Séries Temporais de Imagens de Satélite por VNS Básico com busca local e restrições. </p>
 
         <ul>
-          <li><a href="https://github.com/wandersonluiz/VNSConstrainedKMeans/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/wandersonluiz/VNSConstrainedKMeans/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/wandersonluiz/VNSConstrainedKMeans">View On <strong>GitHub</strong></a></li>
+          <li class="download"><a class="buttons" href="https://github.com/wandersonluiz/vnsconstrainedkmeans/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/wandersonluiz/vnsconstrainedkmeans/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/wandersonluiz/vnsconstrainedkmeans">View On GitHub</a></li>
         </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/wandersonluiz">wandersonluiz</a></p>
+
+
       </header>
       <section>
         <h2>
+<a name="sobre" class="anchor" href="#sobre"><span class="octicon octicon-link"></span></a>Sobre</h2>
+
+<p>Neste repositório você encontrará todos os programas que desenvolvi, arquivos de banco de dados, arquivos fontes LaTeX e todo material que julguei adequado compartilhar. Realizada no departamento de matemática aplicada da Universidade de Campinas (Unicamp) em parceria com o CePAgri/Unicamp.</p>
+
+<h2>
 <a name="agrupamentos-por-vns-constrained-k-means" class="anchor" href="#agrupamentos-por-vns-constrained-k-means"><span class="octicon octicon-link"></span></a>Agrupamentos por VNS constrained k-means</h2>
 
 <p>Este método consistiu na resolução do problema de agrupamento <strong>k</strong> através de uma abordagem partitiva, supondo conhecido <em>a priori</em> um pequeno conjunto de informações sobre a classe de alguns dos elementos. O problema de agrupamento <strong>k</strong> é  formalmente apresentado na tese, mas pode ser entendido, 
@@ -37,11 +44,10 @@ de forma simplificada, como o problema de gerar <strong>k</strong> grupos (sendo
 <p>Para os fins da pesquisa, os objetos a serem agrupados são séries temporais de imagens de satélite. O problema de agrupamento no domínio de imagens é complexo demais para ser resolvido por uma disciplina específica, requerendo uma resolução interdisciplinar que leve em conta o uso de grandes acervos de informações relacionadas ao problema e formas eficientes de gerar um particionamento. <strong>Daí, naturalmente, emerge a proposta baseada no uso conciliado de técnicas de mineração de dados e técnicas de otimização</strong>.</p>
       </section>
       <footer>
-        <p>This project is maintained by <a href="https://github.com/wandersonluiz">wandersonluiz</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
   </body>
 </html>
